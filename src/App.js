@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Login from './Login';
+import Map from './Map';
+import CustomerForm from './CustomerForm';
+import CustomerList from './CustomerList';
+import StartButton from './StartButton';
+import StopButton from './StopButton';
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [customers, setCustomers] = useState([]);
+
+  const handleLogin = () => {
+    // Handle login logic here
+    setLoggedIn(true);
+  };
+
+  const handleAddCustomer = (customer) => {
+    setCustomers([...customers, customer,123456789]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div>
+      {!loggedIn ? (
+        <Login onLogin={handleLogin} />
+      ) : (
+        <>
+          <Map /> 
+          /* <CustomerForm onAddCustomer={handleAddCustomer} />
+          <CustomerList customers={customers} />
+          <StartButton />
+          <StopButton />
+        </>
+      )}
+     </div>
   );
-}
+};
 
 export default App;
